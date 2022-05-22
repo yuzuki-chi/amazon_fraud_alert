@@ -2,7 +2,7 @@
 
 SCRIPT_DIR=$(cd $(dirname $0); pwd)
 
-SRC_DIR="src"
+SRC_DIR="dist"
 ZIP_DIR="src"
 
 if [ -e $SCRIPT_DIR/$ZIP_DIR.zip ]; then
