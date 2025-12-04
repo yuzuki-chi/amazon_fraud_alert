@@ -4,11 +4,14 @@
   "description": "Amazon.co.jpでイラストの無断転用が報告されている商品に警告を表示するChrome拡張機能",
   "scripts": {
     "build": "npm run clean && npm run build:ts && npm run copy-manifest",
-    "build:ts": "esbuild src/content.ts --bundle --outfile=dist/js/content.js --target=es2020",
+    "build:ts": "esbuild src/content.ts --bundle --outfile=dist/js/content.js --target=es2020 --jsx=automatic --jsx-import-source=preact",
     "copy-manifest": "cp src/manifest.json dist/",
-    "watch": "esbuild src/content.ts --bundle --outfile=dist/js/content.js --target=es2020 --watch",
+    "watch": "esbuild src/content.ts --bundle --outfile=dist/js/content.js --target=es2020 --jsx=automatic --jsx-import-source=preact --watch",
     "clean": "rm -rf dist",
     "package": "npm run build && cd dist && zip -r ../fraud-alert.zip ."
+  },
+  "dependencies": {
+    "preact": "^10.24.0"
   },
   "devDependencies": {
     "esbuild": "^0.24.0",
