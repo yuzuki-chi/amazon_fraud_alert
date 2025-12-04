@@ -1,1 +1,14 @@
-front/src.zip
+# Build output
+*.zip
+
+# macOS
+.DS_Store
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Logs
+*.log
