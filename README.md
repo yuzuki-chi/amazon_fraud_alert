@@ -22,13 +22,20 @@ Amazon.co.jp に出品されている商品で、イラストの無断転用が�
    git clone https://github.com/yuzuki-chi/amazon_fraud_alert
    ```
 
-2. Chrome で `chrome://extensions/` を開く
+2. 依存関係をインストールしてビルド
+   ```bash
+   cd extensions
+   npm install
+   npm run build
+   ```
 
-3. 右上の「デベロッパーモード」を有効にする
+3. Chrome で `chrome://extensions/` を開く
 
-4. 「パッケージ化されていない拡張機能を読み込む」をクリック
+4. 右上の「デベロッパーモード」を有効にする
 
-5. `front/src` フォルダを選択
+5. 「パッケージ化されていない拡張機能を読み込む」をクリック
+
+6. `extensions/dist` フォルダを選択
 
 ## 使い方
 
@@ -38,34 +45,57 @@ Amazon.co.jp に出品されている商品で、イラストの無断転用が�
 
 ## 開発
 
+### 必要な環境
+
+- Node.js 18+
+- npm
+
 ### ディレクトリ構成
 
 ```
 amazon_fraud_alert/
-├── front/
-│   ├── src/
-│   │   ├── manifest.json    # Chrome拡張機能の設定ファイル
-│   │   └── js/
-│   │       ├── content.js   # エントリーポイント
-│   │       ├── creator.js   # API通信・データ取得
-│   │       └── display.js   # UI表示
-│   └── makezip.sh           # 配布用zipファイル作成スクリプト
+├── extensions/
+│   ├── src/                  # TypeScriptソースコード
+│   │   ├── content.ts        # エントリーポイント
+│   │   ├── creator.ts        # API通信・データ取得
+│   │   ├── display.ts        # UI表示
+│   │   ├── types.ts          # 型定義
+│   │   └── manifest.json     # Chrome拡張機能の設定
+│   ├── dist/                 # ビルド出力（gitignore対象）
+│   ├── package.json
+│   ├── tsconfig.json
+│   └── makezip.sh
+├── LICENSE
 └── README.md
 ```
 
-### ビルド
-
-Chrome ウェブストアへの提出用 zip ファイルを作成：
+### ビルドコマンド
 
 ```bash
-cd front
-./makezip.sh
+cd extensions
+
+# 依存関係のインストール
+npm install
+
+# ビルド
+npm run build
+
+# 開発時の自動ビルド（ファイル変更を監視）
+npm run watch
+
+# Chrome ウェブストア提出用 zip ファイルを作成
+npm run package
 ```
+
+### 技術スタック
+
+- **言語**: TypeScript
+- **バンドラー**: esbuild
+- **ターゲット**: ES2020
 
 ## 注意事項
 
 - この拡張機能は Amazon.co.jp でのみ動作します
-- 現在 Manifest V2 を使用しています（将来的に V3 への移行が必要になる可能性があります）
 
 ## ライセンス
 
@@ -73,4 +103,5 @@ cd front
 
 ## 更新履歴
 
-- **v1.00** (2021/01/09) - 初版公開
+- **v1.1.0** - TypeScript化
+- **v1.0.0** (2021/01/09) - 初版公開

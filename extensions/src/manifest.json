@@ -1,14 +1,12 @@
 {
-    "name": "fraud_alert",
-    "version": "1.00",
-    "manifest_version": 2,
-    "description": "amazon.co.jpで動く, イラストの無断転用の報告ツール",
-    "content_scripts": [{
-        "matches": ["https://www.amazon.co.jp/*"],
-        "js": [
-            "js/display.js",
-            "js/creator.js",
-            "js/content.js"
-        ]
-    }]
+  "name": "Fraud Alert",
+  "version": "1.1.0",
+  "manifest_version": 3,
+  "description": "Amazon.co.jpでイラストの無断転用が報告されている商品に警告を表示します",
+  "content_scripts": [
+    {
+      "matches": ["https://www.amazon.co.jp/*"],
+      "js": ["js/content.js"]
+    }
+  ]
 }

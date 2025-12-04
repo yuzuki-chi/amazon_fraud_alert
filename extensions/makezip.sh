@@ -1,12 +1,17 @@
 #!/bin/bash
 
+# Chrome拡張機能のパッケージングスクリプト
+# 使用方法: ./makezip.sh
+
 SCRIPT_DIR=$(cd $(dirname $0); pwd)
 
-SRC_DIR="src"
-ZIP_DIR="src"
+# ビルドを実行
+echo "Building TypeScript..."
+cd "$SCRIPT_DIR"
+npm run build
 
-if [ -e $SCRIPT_DIR/$ZIP_DIR.zip ]; then
-    rm -r $SCRIPT_DIR/$ZIP_DIR.zip
-fi
+# zipファイルを作成
+echo "Creating zip file..."
+npm run package
 
-zip -r $SCRIPT_DIR/$ZIP_DIR.zip $SCRIPT_DIR/$SRC_DIR/
+echo "Done! fraud-alert.zip has been created."
