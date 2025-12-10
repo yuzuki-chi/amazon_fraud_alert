@@ -1,10 +1,10 @@
 /**
  * content.ts
- * Entry point
+ * Entry point - Amazon商品ページで警告バナーを表示
  */
 
 import { checkAsin } from "./creator.js";
-import { displayAlertBanner, displayAsinForm } from "./display.js";
+import { displayAlertBanner } from "./display.js";
 
 console.log("fraud_alert is running...");
 
@@ -22,8 +22,9 @@ switch (result.status) {
     break;
 
   case "not_found":
-    // ASINがDBに存在しない → 報告フォームを表示
-    displayAsinForm(result.asin);
+    // ASINがDBに存在しない
+    // → Popupで報告できるので、ここでは何も表示しない
+    console.log(`[info] ASIN ${result.asin} is not registered. Use popup to report.`);
     break;
 
   case "found":

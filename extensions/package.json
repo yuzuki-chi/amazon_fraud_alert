@@ -4,9 +4,9 @@
   "type": "module",
   "description": "Amazon.co.jpでイラストの無断転用が報告されている商品に警告を表示するChrome拡張機能",
   "scripts": {
-    "build": "npm run clean && npm run build:ts && npm run copy-manifest",
+    "build": "npm run clean && npm run build:ts && npm run copy-assets",
     "build:ts": "node esbuild.config.js",
-    "copy-manifest": "cp src/manifest.json dist/",
+    "copy-assets": "cp src/manifest.json dist/ && cp src/popup.html dist/",
     "watch": "node esbuild.config.js --watch",
     "clean": "rm -rf dist",
     "package": "npm run build && cd dist && zip -r ../fraud-alert.zip ."
