@@ -4,8 +4,8 @@
  */
 
 import { render } from "preact";
-import type { Creator } from "./types.js";
-import { AlertBanner, ReportLink } from "./components/index.js";
+import type { AsinData } from "./types.js";
+import { AlertBanner, AsinForm, ReportLink } from "./components/index.js";
 
 /**
  * Amazonのメインコンテンツ（dp）の前にコンポーネントを挿入するためのコンテナを作成
@@ -26,26 +26,37 @@ function createMountPoint(): HTMLElement | null {
 /**
  * 無断転用が報告されている商品の警告を表示する
  */
-export function displayContent(creators: Creator[]): void {
-  const creator = creators[0];
+export function displayAlertBanner(data: AsinData): void {
   const mountPoint = createMountPoint();
   if (!mountPoint) return;
 
-  render(
-    <AlertBanner
-      creatorName={creator.name}
-      creatorLink={creator.link}
-      asin={creator.asin}
-    />,
-    mountPoint
-  );
+  render(<AlertBanner data={data} />, mountPoint);
 }
 
 /**
- * 未報告商品に対する報告フォームへのリンクを表示する
+ * ASIN新規作成フォームを表示する
+ */
+export function displayAsinForm(asin: string): void {
+  console.log(`ASINフォームを表示: ${asin}`);
+
+  const mountPoint = createMountPoint();
+  if (!mountPoint) return;
+
+  render(<AsinForm asin={asin} />, mountPoint);
+}
+
+/**
+ * 未報告商品に対する報告フォームへのリンクを表示する（後方互換性のため残す）
  */
 export function displayForm(asin: string): void {
-  console.log(`asin is ${asin}`);
+  displayAsinForm(asin);
+}
+
+/**
+ * レガシー: 未報告商品に対する報告フォームへのリンクを表示する
+ */
+export function displayReportLink(asin: string): void {
+  console.log(`報告リンクを表示: ${asin}`);
 
   const mountPoint = createMountPoint();
   if (!mountPoint) return;
