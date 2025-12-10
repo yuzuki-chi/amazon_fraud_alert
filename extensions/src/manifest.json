@@ -1,8 +1,19 @@
 {
   "name": "Fraud Alert",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "manifest_version": 3,
   "description": "Amazon.co.jpでイラストの無断転用が報告されている商品に警告を表示します",
+  "permissions": [
+    "activeTab"
+  ],
+  "host_permissions": [
+    "https://fraudalert.citron-tree.jp/*",
+    "http://localhost:8000/*"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Fraud Alert - イラスト転用を報告"
+  },
   "content_scripts": [
     {
       "matches": ["https://www.amazon.co.jp/*"],
